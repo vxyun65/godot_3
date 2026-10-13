@@ -1282,6 +1282,18 @@ position = Vector2(30, -10)
 [node name="Coin3" parent="Coins/CoinsArc4" unique_id=1691536943 instance=ExtResource("4")]
 position = Vector2(60, 0)
 
+[node name="Coin4" parent="Coins" unique_id=143622931 instance=ExtResource("4")]
+position = Vector2(820, 332)
+
+[node name="Coin3" parent="Coins" unique_id=668959176 instance=ExtResource("4")]
+position = Vector2(760, 587)
+
+[node name="Coin2" parent="Coins" unique_id=1399163833 instance=ExtResource("4")]
+position = Vector2(700, 587)
+
+[node name="Coin" parent="Coins" unique_id=194717454 instance=ExtResource("4")]
+position = Vector2(730, 587)
+
 [node name="CoinsArc3" type="Node2D" parent="Coins" unique_id=719296825]
 position = Vector2(594, 332)
 
@@ -1294,6 +1306,9 @@ position = Vector2(30, -10)
 position = Vector2(60, 0)
 
 [node name="Platforms" type="Node" parent="." unique_id=561757885]
+
+[node name="Platform3" parent="Platforms" unique_id=1076305466 instance=ExtResource("3")]
+position = Vector2(804, 169)
 
 [node name="Platform" parent="Platforms" unique_id=587856753 instance=ExtResource("3")]
 z_index = 0
@@ -1332,6 +1347,9 @@ position = Vector2(-3.20203, -8.41145)
 polygon = PackedVector2Array(-170.838, 7.9798, -90.8381, -15.201, 95.0401, -20.233, 83.4959, 3.25599, -51.1185, 8.44958, -176.787, 34.856)
 
 [node name="Enemies" type="Node" parent="." unique_id=1948211311]
+
+[node name="Enemy" parent="Enemies" unique_id=596459649 instance=ExtResource("2")]
+position = Vector2(123, 308)
 
 [node name="Enemy2" parent="Enemies" unique_id=1695983456 instance=ExtResource("2")]
 z_index = 2
