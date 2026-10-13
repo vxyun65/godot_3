@@ -1,0 +1,44 @@
+name: godot-ci
+
+# Запуск: при каждом пуше в main, а также вручную (Actions -> godot-ci -> Run workflow)
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: 4.7.2   # точная версия Godot из Help -> About
+
+jobs:
+  export-game:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    name: Export game
+    steps:
+      # 1. Загружаем исходники проекта
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # 2. Скачиваем Godot и шаблоны экспорта, экспортируем игру по export_presets.cfg
+      - name: Godot Export
+        id: export
+        uses: firebelley/godot-export@v7.0.0
+        with:
+          godot_executable_download_url: https://github.com/godotengine/godot/releases/download/${{ env.GODOT_VERSION }}-stable/Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/${{ env.GODOT_VERSION }}-stable/Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
+          relative_project_path: ./
+          archive_output: true
+          cache: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      # 3. Публикуем архивы с игрой в GitHub Releases
+      - name: Create release
+        uses: ncipollo/release-action@v1.18.0
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          generateReleaseNotes: true
+          tag: v1.0.${{ github.run_number }}
+          commit: ${{ github.sha }}
+          artifacts: ${{ steps.export.outputs.archive_directory }}/*
