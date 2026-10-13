@@ -1,45 +1,62 @@
-# 2D Platformer
+# godot_3 — СКВ в игровом движке Godot Engine
 
-This demo is a pixel art 2D platformer with graphics and sound.
+[![godot-ci](https://github.com/vxyun65/godot_3/actions/workflows/gh-publish.yml/badge.svg)](https://github.com/vxyun65/godot_3/actions/workflows/gh-publish.yml)
 
-It shows you how to code characters and physics-based objects
-in a real game context. This is a relatively complete demo
-where the player can jump, walk on slopes, fire bullets,
-interact with enemies, and more. It contains one closed
-level, and the player is invincible, unlike the enemies.
+Учебный проект по лабораторной работе №3 дисциплины «Основы профессиональной деятельности» (ИТМО, Школа разработки видеоигр).
 
-You will find most of the demo’s content in the `level.tscn` scene.
-You can open it from the default `game.tscn` scene, or double
-click on `level.tscn` in the `src/level/` directory.
+Основа — официальное **2D Platformer Demo** из Godot Asset Library: робот бегает, прыгает, стреляет, собирает монеты и уничтожает врагов. На уровне `level/level.tscn` команда достроила новые платформы и добавила объекты взаимодействия. Работа велась в двух виртуальных машинах Ubuntu 20.04, доступ к GitHub — по SSH-ключам.
 
-We invite you to open the demo's GDScript files in the editor as
-they contain a lot of comments that explain how each class works.
+## Скачать игру
 
-Language: GDScript
+**[Releases](https://github.com/vxyun65/godot_3/releases/latest)** → `godot_3-windows.zip`. Распакуйте архив и запустите `godot_3.exe` (рядом должен лежать `godot_3.pck`).
 
-Renderer: Compatibility
+**Управление:** ← → или A / D — бег, ↑ или W — прыжок, пробел, Z или Ctrl — выстрел, Esc — пауза, F11 — полноэкранный режим. Поддерживается геймпад.
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/120
+## Что добавлено на уровень
 
-## Features
+- **Архитектура** (Джуниор): новые платформы и стены на тайловой карте `TileMapLayer`, декорации — трава, цветы, камень, лиана.
+- **Объекты взаимодействия** (Сеньор): 4 монеты, движущаяся платформа и враг.
 
-- Side-scrolling player controller using [`CharacterBody2D`](https://docs.godotengine.org/en/latest/classes/class_characterbody2d.html).
-    - Can walk on and snap to slopes.
-    - Can shoot, including while jumping.
-- Enemies that crawl on the floor and change direction when they encounter an obstacle.
-- Camera that stays within the level’s bounds.
-- Supports keyboard and gamepad controls.
-- Platforms that can move in any direction.
-- Gun that shoots bullets with rigid body (natural) physics.
-- Collectible coins.
-- Pause and pause menu.
-- Pixel art visuals.
-- Sound effects and music.
+## Команда
 
-## Screenshots
+Работа выполнена одним студентом, роли выполнялись поочерёдно. У каждой роли — своя ВМ и свой SSH-ключ.
 
-![2D Platformer](screenshots/platformer.webp)
+| Роль | Аккаунт | ВМ | Что сделано |
+|---|---|---|---|
+| Сеньор | @vxyun65 | Ubuntu 20.04 («4») | выбор проекта, репозиторий, объекты взаимодействия, слияние веток |
+| Джуниор | @vior843 | Ubuntu 20.04 («4 Clone») | новая архитектура уровня |
+| Девопс | @vxyun65 | Ubuntu 20.04 («4») | пресет экспорта, CI/CD на GitHub Actions, README |
 
-## Music
+## Как открыть проект
 
-[*Pompy*](https://soundcloud.com/madbr/pompy) by Hubert Lamontagne (madbr)
+1. Установите **Godot Engine 4.7.2** (обычная версия, не .NET).
+2. Клонируйте репозиторий:
+   ```bash
+   git clone git@github.com:vxyun65/godot_3.git
+   ```
+3. Godot → **Import** → `godot_3/project.godot`. Главная сцена — `game_singleplayer.tscn`, уровень — `level/level.tscn`. Рендерер Compatibility (OpenGL), поэтому проект запускается и в виртуальной машине.
+
+## CI/CD
+
+Workflow `.github/workflows/gh-publish.yml` запускается **при каждом пуше в `main`** (и вручную):
+
+1. `actions/checkout` — загрузка исходников;
+2. `firebelley/godot-export` — скачивает Godot 4.7.2 и шаблоны экспорта и экспортирует игру по пресету `godot_3-windows` из `export_presets.cfg`;
+3. `ncipollo/release-action` — публикует архив в GitHub Releases с тегом `v1.0.<номер запуска>` и автоматическим списком изменений.
+
+Для публикации нужен секрет репозитория `GH_TOKEN` (персональный токен с правом `repo`).
+
+## Правила работы с репозиторием
+
+- Ветки тематические: `feature/…`, `fix/…`, `ci/…`, `docs/…`. В `main` изменения попадают через pull request.
+- Коммиты на английском в формате Conventional Commits (`feat:`, `fix:`, `ci:`, `docs:`, `chore:`), атомарные.
+- Папка `.godot/` (кэш импорта) и результаты экспорта `build/` исключены через `.gitignore`.
+
+## История изменений
+
+| № | Что сделано |
+|---|---|
+| #1 | Новые платформы, стены и декорации на уровне (Джуниор) |
+| #2 | Монеты, движущаяся платформа и враг (Сеньор) |
+| #3 | Пресет экспорта и workflow экспорта и публикации в Releases (Девопс) |
+| v1.0.1 | Первый автоматический релиз под Windows |
