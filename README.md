@@ -60,3 +60,7 @@ Workflow `.github/workflows/gh-publish.yml` запускается **при ка
 | #2 | Монеты, движущаяся платформа и враг (Сеньор) |
 | #3 | Пресет экспорта и workflow экспорта и публикации в Releases (Девопс) |
 | v1.0.1 | Первый автоматический релиз под Windows |
+
+## Лицензия
+
+Исходное демо [2D Platformer Demo](https://github.com/godotengine/godot-demo-projects) создано разработчиками Godot Engine и распространяется по лицензии MIT: см. [LICENSE.md](LICENSE.md).
